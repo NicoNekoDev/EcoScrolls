@@ -12,6 +12,7 @@ import com.willfp.ecoscrolls.config.TargetsYml
 import com.willfp.ecoscrolls.display.ScrollDisplay
 import com.willfp.ecoscrolls.gui.updateInscribeMenu
 import com.willfp.ecoscrolls.libreforge.ConditionHasScroll
+import com.willfp.ecoscrolls.libreforge.EffectRemoveScroll
 import com.willfp.ecoscrolls.libreforge.EffectInscribeItem
 import com.willfp.ecoscrolls.libreforge.FilterScroll
 import com.willfp.ecoscrolls.libreforge.TriggerInscribe
@@ -52,6 +53,7 @@ class EcoScrollsPlugin : LibreforgePlugin() {
     override fun handleEnable() {
         Conditions.register(ConditionHasScroll)
         Effects.register(EffectInscribeItem)
+        Effects.register(EffectRemoveScroll)
         Filters.register(FilterScroll)
         Triggers.register(TriggerInscribe)
         Triggers.register(TriggerTryInscribe)

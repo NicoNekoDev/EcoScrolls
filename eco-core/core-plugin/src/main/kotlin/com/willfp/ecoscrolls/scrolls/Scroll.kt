@@ -186,6 +186,24 @@ class Scroll(
         return ScrollLevel(plugin, this, level, effects, conditions)
     }
 
+    fun canDetach(itemStack: ItemStack): Boolean {
+        if (itemStack.scrolls.none { it.scroll == this }) {
+            return false
+        }
+
+        val level = itemStack.getScrollLevel(this)?.level ?: 0
+
+        return level > 0;
+    }
+
+    fun detach(itemStack: ItemStack) {
+        val current = itemStack.scrolls.find { it.scroll == this }?.level ?: return
+
+        val level = this.getLevel(current)
+
+        itemStack.scrolls = itemStack.scrolls.filter { it.scroll != this }.toSet() - level
+    }
+
     fun canInscribe(itemStack: ItemStack): Boolean {
         if (targets.none { it.matches(itemStack) }) {
             return false
@@ -207,11 +225,7 @@ class Scroll(
 
         val level = itemStack.getScrollLevel(this)?.level ?: 0
 
-        if (level >= maxLevel) {
-            return false
-        }
-
-        return true
+        return level < maxLevel
     }
 
     fun inscribe(itemStack: ItemStack, player: Player): Boolean {
