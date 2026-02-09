@@ -1,6 +1,6 @@
 package com.willfp.ecoscrolls.scrolls
 
-import com.willfp.ecoscrolls.EcoScrollsPlugin
+import com.willfp.ecoscrolls.plugin
 import com.willfp.ecoscrolls.scrolls.event.ScrollInscribeEvent
 import com.willfp.ecoscrolls.scrolls.event.ScrollTryInscribeEvent
 import com.willfp.ecoscrolls.target.Targets.targets
@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.Optional
 import kotlin.math.min
 
-class InscriptionHandler(private val plugin: EcoScrollsPlugin) {
+object InscriptionHandler {
     private lateinit var applyEffects: Optional<Chain>
     private lateinit var denyEffects: Optional<Chain>
 
@@ -25,15 +25,19 @@ class InscriptionHandler(private val plugin: EcoScrollsPlugin) {
     internal fun reload() {
         val context = ViolationContext(plugin, "Inscriptions")
 
-        applyEffects = Optional.ofNullable(Effects.compileChain(
-            plugin.configYml.getSubsections("inscription.apply-effects"),
-            context.with("Apply Effects")
-        ))
+        applyEffects = Optional.ofNullable(
+            Effects.compileChain(
+                plugin.configYml.getSubsections("inscription.apply-effects"),
+                context.with("Apply Effects")
+            )
+        )
 
-        denyEffects = Optional.ofNullable(Effects.compileChain(
-            plugin.configYml.getSubsections("inscription.deny-effects"),
-            context.with("Deny Effects")
-        ))
+        denyEffects = Optional.ofNullable(
+            Effects.compileChain(
+                plugin.configYml.getSubsections("inscription.deny-effects"),
+                context.with("Deny Effects")
+            )
+        )
     }
 
     private fun inscriptionTrigger(item: ItemStack, scroll: Scroll, player: Player) =
