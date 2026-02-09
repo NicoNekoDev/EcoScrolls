@@ -41,9 +41,9 @@ internal lateinit var plugin: EcoScrollsPlugin
     private set
 
 class EcoScrollsPlugin : LibreforgePlugin() {
-    val targetsYml = TargetsYml
+    val targetsYml: TargetsYml = TargetsYml(this)
 
-    val inscriptionHandler = InscriptionHandler
+    val inscriptionHandler = InscriptionHandler(this)
 
     init {
         plugin = this

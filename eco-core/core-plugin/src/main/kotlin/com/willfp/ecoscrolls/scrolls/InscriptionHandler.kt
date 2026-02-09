@@ -1,6 +1,6 @@
 package com.willfp.ecoscrolls.scrolls
 
-import com.willfp.ecoscrolls.plugin
+import com.willfp.ecoscrolls.EcoScrollsPlugin
 import com.willfp.ecoscrolls.scrolls.event.ScrollInscribeEvent
 import com.willfp.ecoscrolls.scrolls.event.ScrollTryInscribeEvent
 import com.willfp.ecoscrolls.target.Targets.targets
@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.Optional
 import kotlin.math.min
 
-object InscriptionHandler {
+class InscriptionHandler(private val plugin: EcoScrollsPlugin) {
     private lateinit var applyEffects: Optional<Chain>
     private lateinit var denyEffects: Optional<Chain>
 
